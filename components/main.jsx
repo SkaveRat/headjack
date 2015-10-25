@@ -1,7 +1,14 @@
-const React = require('react');
-const Contacts = require('./contacts.jsx');
+import React from 'react';
+import Contacts from './contacts.jsx';
+import MatrixActions from '../actions/MatrixActions'
+
 
 const Main = React.createClass({
+
+    componentDidMount: function() {
+        MatrixActions.init();
+    },
+
     render: function() {
         return <div className="container">
             <div className="row">

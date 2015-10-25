@@ -1,21 +1,42 @@
 const React = require('react');
+const RoomStore = require('./../stores/RoomStore');
+
+const Room = require('./room.jsx');
+
+function getRoomState() {
+    return {
+        allRooms: RoomStore.getAll()
+    }
+}
 
 const Contacts = React.createClass({
+
+    getInitialState: function() {
+        return getRoomState();
+    },
+
+    componentDidMount: function() {
+        RoomStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function() {
+        RoomStore.removeChangeListener(this._onChange);
+    },
+
     render: function() {
+        let allTodos = getRoomState();
+
+        //for (var key in allTodos.allRooms) {
+        //    console.log(key);
+        //}
+
         return <ul className="list-group">
-            <li className="list-group-item">
-                <span className="label label-default label-pill pull-right">14</span>
-                Cras justo odio
-            </li>
-            <li className="list-group-item">
-                <span className="label label-default label-pill pull-right">2</span>
-                Dapibus ac facilisis in
-            </li>
-            <li className="list-group-item">
-                <span className="label label-default label-pill pull-right">1</span>
-                Morbi leo risus
-            </li>
+
         </ul>
+    },
+
+    _onChange: function() {
+        this.setState(getRoomState());
     }
 });
 module.exports = Contacts;
