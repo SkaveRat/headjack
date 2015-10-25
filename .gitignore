@@ -3,3 +3,6 @@
 
 #compiled
 css
+
+#libs
+node_modules
