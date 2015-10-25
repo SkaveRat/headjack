@@ -1,0 +1,9 @@
+$enable-flex: true;
+$enable-transitions: true;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import "bootstrap/bootstrap";
+
+body {
+  font-family: 'Open Sans', Verdana, sans-serif;
+}
