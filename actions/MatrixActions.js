@@ -20,6 +20,17 @@ class MatrixActions {
                 },
                 source: 'Event'
             });
+
+            matrixClient.on("Room.timeline", function (event, state) {
+                AppDipatcher.dispatch({
+                    action: {
+                        actionType: RoomConstants.ROOM_UPDATE,
+                        room: state
+                    },
+                    source: 'Event'
+                })
+            });
+
         });
 
         matrixClient.startClient();

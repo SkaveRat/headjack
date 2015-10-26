@@ -24,8 +24,11 @@ const Contacts = React.createClass({
     },
 
     render: function() {
-        let rooms = getRoomsState().rooms;
-
+        let roomsObject = getRoomsState().rooms;
+        let rooms = [];
+        for (var key in roomsObject) {
+            rooms.push(roomsObject[key]);
+        }
 
         rooms.sort((a,b) => {
             return a.timeline[a.timeline.length-1].event.age - b.timeline[b.timeline.length-1].event.age;

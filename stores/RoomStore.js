@@ -6,27 +6,14 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
-var _rooms = []; // collection of rooms
+var _rooms = {};
 
 /**
- * Create a Room item.
- * @param {string} id Room id
+ * Create or update a Room item.
+ * @param {Room} room Room id
  */
-function create(id) {
-    // Using the current timestamp in place of a real id.
-    _rooms.push({
-        id: id,
-        members: 0,
-        name: id
-    });
-}
-
-/**
- * Delete a Room
- * @param {string} id
- */
-function destroy(id) {
-    delete _rooms[id];
+function create(room) {
+    _rooms[room.roomId] = room
 }
 
 var RoomStore = assign({}, EventEmitter.prototype, {
@@ -59,16 +46,20 @@ var RoomStore = assign({}, EventEmitter.prototype, {
 
     dispatcherIndex: AppDispatcher.register(function(payload) {
         var action = payload.action;
-        var room_id;
 
         switch(action.actionType) {
             case RoomConstants.ROOM_LIST:
-                _rooms = action.rooms;
-                console.log(action.rooms);
+                action.rooms.forEach(function (room) {
+                    create(room);
+                });
                 RoomStore.emitChange();
                 break;
 
-            // add more cases for other actionTypes, like TODO_UPDATE, etc.
+            case RoomConstants.ROOM_UPDATE:
+                create(action.room);
+                RoomStore.emitChange();
+                break;
+
         }
 
         return true; // No errors. Needed by promise in Dispatcher.
