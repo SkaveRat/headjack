@@ -6,7 +6,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
-var _rooms = {}; // collection of rooms
+var _rooms = []; // collection of rooms
 
 /**
  * Create a Room item.
@@ -14,11 +14,11 @@ var _rooms = {}; // collection of rooms
  */
 function create(id) {
     // Using the current timestamp in place of a real id.
-    _rooms[id] = {
+    _rooms.push({
         id: id,
         members: 0,
         name: id
-    };
+    });
 }
 
 /**
@@ -63,7 +63,9 @@ var RoomStore = assign({}, EventEmitter.prototype, {
 
         switch(action.actionType) {
             case RoomConstants.ROOM_LIST:
+                _rooms = action.rooms;
                 console.log(action.rooms);
+                RoomStore.emitChange();
                 break;
 
             // add more cases for other actionTypes, like TODO_UPDATE, etc.

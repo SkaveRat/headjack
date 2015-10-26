@@ -3,16 +3,16 @@ const RoomStore = require('./../stores/RoomStore');
 
 const Room = require('./room.jsx');
 
-function getRoomState() {
+function getRoomsState() {
     return {
-        allRooms: RoomStore.getAll()
+        rooms: RoomStore.getAll()
     }
 }
 
 const Contacts = React.createClass({
 
     getInitialState: function() {
-        return getRoomState();
+        return getRoomsState();
     },
 
     componentDidMount: function() {
@@ -24,19 +24,24 @@ const Contacts = React.createClass({
     },
 
     render: function() {
-        let allTodos = getRoomState();
+        let rooms = getRoomsState().rooms;
 
-        //for (var key in allTodos.allRooms) {
-        //    console.log(key);
-        //}
 
-        return <ul className="list-group">
+        rooms.sort((a,b) => {
+            return a.timeline[a.timeline.length-1].event.age - b.timeline[b.timeline.length-1].event.age;
+        });
 
-        </ul>
+        return <div className="col-xs-6">
+            <ul className="list-group">
+                {rooms.map((room) =>
+                    <li className="list-group-item" key={room.roomId}>{room.name}</li>
+                )}
+            </ul>
+        </div>
     },
 
     _onChange: function() {
-        this.setState(getRoomState());
+        this.setState(getRoomsState());
     }
 });
 module.exports = Contacts;
