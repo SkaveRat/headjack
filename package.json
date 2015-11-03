@@ -1,4 +1,6 @@
 {
+  "repository": "https://github.com/SkaveRat/headjack",
+  "license": "Apache-2.0",
   "name": "matrix-headjack",
   "version": "0.1.0",
   "main": "bootstrapper.js",
@@ -11,6 +13,7 @@
     "matrix-js-sdk": "^0.3.0",
     "react": "0.14.0",
     "react-dom": "0.14.0",
+    "reflux": "^0.3.0",
     "request": "^2.65.0"
   },
   "devDependencies": {
