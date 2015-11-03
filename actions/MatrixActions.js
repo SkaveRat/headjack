@@ -2,7 +2,27 @@ import MatrixSDK from 'matrix-js-sdk';
 import AppDipatcher from '../dispatcher/AppDispatcher.js'
 import RoomConstants from '../constants/RoomConstants.js'
 
+import request from 'request';
+
 class MatrixActions {
+
+    static login(user_id, password) {
+
+        let client = MatrixSDK.createClient({
+            request: request,
+            baseUrl: 'https://m.skaverat.net:61448'
+        });
+
+        client.loginWithPassword(user_id, password)
+            .then(function (foo) {
+                console.log(foo);
+            }).catch(function (foo) {
+                console.log(foo);
+            });
+
+    }
+
+
 
     static init() {
         var matrixClient = MatrixSDK.createClient({
