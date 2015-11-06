@@ -7,8 +7,20 @@ export default Reflux.createStore({
 
     data: {},
 
-    getInitialState() {
-        return this.data;
+    getCredentials: function() {
+
+        if(localStorage.credentials) {
+            return JSON.parse(localStorage.credentials);
+        }
+
+        return {};
+    },
+    setCredentials: function (credentials) {
+        localStorage.credentials = JSON.stringify(credentials);
+    },
+
+    getInitialState: function() {
+        return this.getCredentials();
     },
 
     init: function() {
@@ -17,13 +29,13 @@ export default Reflux.createStore({
     },
 
     handleSuccessLoginRequest: function (res) {
-        this.data = {
+        this.setCredentials({
             user_id: res.user_id,
             access_token: res.access_token,
             home_server: res.home_server
-        };
+        });
 
-        this.trigger(this.data);
+        this.trigger(this.getCredentials());
     },
 
     handleFailedLoginRequest: function (res) {
