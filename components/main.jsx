@@ -1,25 +1,21 @@
 import React from 'react';
+import Reflux from 'reflux';
 import Contacts from './contacts.jsx';
 import LoginScreen from './loginscreen.jsx';
-import MatrixActions from '../actions/MatrixActions'
 
+import CredentialsStore from '../stores/CredentialsStore.js';
 
 const Main = React.createClass({
 
-    componentDidMount: function() {
-        //MatrixActions.init();
-    },
+    mixins: [Reflux.connect(CredentialsStore, 'credentials')],
 
     render: function() {
-
-        let loggedIn = false;
         let view = null;
 
-
-        if(!loggedIn) {
-            view = <LoginScreen />;
-        }else{
+        if(this.state.credentials.access_token) {
             view = <Contacts />;
+        }else{
+            view = <LoginScreen />;
         }
 
 

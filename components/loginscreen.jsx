@@ -20,10 +20,7 @@ const LoginScreen = React.createClass({
         let user_id = this.state.user_id;
         let password = this.state.password;
 
-        console.log(this.state);
-
         return <div className="row">
-            <h1>{this.state.access_token}</h1>
             <div className="col-xs-offset-2 col-xs-8">
                 <form onSubmit={this.handleLogin}>
                     <div className="form-group row">
