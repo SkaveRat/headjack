@@ -1,8 +1,8 @@
 import MatrixSDK from 'matrix-js-sdk';
+import Reflux from 'reflux';
 
 import request from 'request';
-
-import Reflux from 'reflux';
+import dns from 'dns';
 
 let MatrixActions = Reflux.createActions({
     "login": {children: ["success", "failed"]}
@@ -11,14 +11,26 @@ let MatrixActions = Reflux.createActions({
 
 MatrixActions.login.listen(function (user_id, password) {
 
-    let client = MatrixSDK.createClient({
-        request: request,
-        baseUrl: 'https://m.skaverat.net:61448'
-    });
+    let domain = user_id.split(':')[1];
 
-    client.loginWithPassword(user_id, password)
-        .then(this.success)
-        .catch(this.failed);
+
+    dns.resolveSrv('_matrix._tcp.' + domain,(err, data) => {
+
+        let port = '';
+        if(!err) {
+            port = ':' + data[0].port;
+        }
+
+        let client = MatrixSDK.createClient({
+            request: request,
+            baseUrl: 'https://' + domain + port
+        });
+
+        client.loginWithPassword(user_id, password)
+            .then(this.success)
+            .catch(this.failed);
+
+    });
 });
 
 //import request from 'request';
