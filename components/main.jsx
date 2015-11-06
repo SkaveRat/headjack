@@ -19,7 +19,7 @@ const Main = React.createClass({
         }
 
 
-        return <div className="container">
+        return <div className="container-fluid">
                 {view}
             </div>
     }
