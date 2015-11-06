@@ -24,6 +24,13 @@ export default React.createClass({
     },
 
     render: function () {
-        return <Rooms />
+        return <div className="row">
+            <div className="col-xs-4">
+                <Rooms />
+            </div>
+            <div className="col-xs-8">The Chat</div>
+
+        </div>;
+
     }
 });
