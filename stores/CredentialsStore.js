@@ -30,6 +30,7 @@ export default Reflux.createStore({
 
     handleSuccessLoginRequest: function (res) {
         this.setCredentials({
+            base_url: res.base_url,
             user_id: res.user_id,
             access_token: res.access_token,
             home_server: res.home_server

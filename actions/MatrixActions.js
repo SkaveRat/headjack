@@ -21,13 +21,17 @@ MatrixActions.login.listen(function (user_id, password) {
             port = ':' + data[0].port;
         }
 
+        var base_url = 'https://' + domain + port;
         let client = MatrixSDK.createClient({
             request: request,
-            baseUrl: 'https://' + domain + port
+            baseUrl: base_url
         });
 
         client.loginWithPassword(user_id, password)
-            .then(this.success)
+            .then((res) => {
+                res.base_url = base_url;
+                this.success(res)
+            })
             .catch(this.failed);
 
     });
