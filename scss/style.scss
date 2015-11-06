@@ -1,9 +1,19 @@
 $enable-flex: true;
 $enable-transitions: true;
+$enable-shadows: true;
+$enable-gradients: true;
+$spacer-x: 0;
+
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import "bootstrap/bootstrap";
 
 body {
   font-family: 'Open Sans', Verdana, sans-serif;
+}
+
+#roomlist {
+  max-height: 22rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

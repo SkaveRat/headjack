@@ -22,7 +22,7 @@ export default React.createClass({
             return a.timeline[a.timeline.length-1].event.age - b.timeline[b.timeline.length-1].event.age;
         });
 
-        return <ul className="list-group">
+        return <ul id="roomlist" className="list-group">
                 {rooms.map((room) =>
                     <li className="list-group-item" key={room.roomId}>{room.name}</li>
                 )}
