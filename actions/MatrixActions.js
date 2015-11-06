@@ -13,11 +13,11 @@ MatrixActions.login.listen(function (user_id, password) {
 
     let domain = user_id.split(':')[1];
 
+    dns.resolveSrv('_matrix._tcp.' + domain, (err, data) => {
 
-    dns.resolveSrv('_matrix._tcp.' + domain,(err, data) => {
-
-        let port = '';
-        if(!err) {
+        let port = ':8448';
+        if (!err) {
+            domain = data[0].name;
             port = ':' + data[0].port;
         }
 
