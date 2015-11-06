@@ -1,30 +1,18 @@
 const React = require('react');
+const Reflux = require('reflux');
 const RoomStore = require('./../stores/RoomStore');
-
 const Room = require('./room.jsx');
 
-function getRoomsState() {
-    return {
-        rooms: RoomStore.getAll()
-    }
-}
 
-const Contacts = React.createClass({
+export default React.createClass({
+    mixins: [Reflux.connect(RoomStore, 'rooms')],
 
     getInitialState: function() {
-        return getRoomsState();
-    },
-
-    componentDidMount: function() {
-        RoomStore.addChangeListener(this._onChange);
-    },
-
-    componentWillUnmount: function() {
-        RoomStore.removeChangeListener(this._onChange);
+        return this.state;
     },
 
     render: function() {
-        let roomsObject = getRoomsState().rooms;
+        let roomsObject = this.state.rooms;
         let rooms = [];
         for (var key in roomsObject) {
             rooms.push(roomsObject[key]);
@@ -41,10 +29,5 @@ const Contacts = React.createClass({
                 )}
             </ul>
         </div>
-    },
-
-    _onChange: function() {
-        this.setState(getRoomsState());
     }
 });
-module.exports = Contacts;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Reflux from 'reflux';
-import Contacts from './contacts.jsx';
+import Chat from './chat.jsx';
 import LoginScreen from './loginscreen.jsx';
 
 import CredentialsStore from '../stores/CredentialsStore.js';
@@ -13,7 +13,7 @@ const Main = React.createClass({
         let view = null;
 
         if(this.state.credentials.access_token) {
-            view = <Contacts />;
+            view = <Chat />;
         }else{
             view = <LoginScreen />;
         }
@@ -21,7 +21,6 @@ const Main = React.createClass({
 
         return <div className="container">
                 {view}
-                <div className="col-xs-6">World</div>
             </div>
     }
 });

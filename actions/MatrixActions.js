@@ -5,7 +5,8 @@ import request from 'request';
 import dns from 'dns';
 
 let MatrixActions = Reflux.createActions({
-    "login": {children: ["success", "failed"]}
+    "login": {children: ["success", "failed"]},
+    "init": {children: ["success", "failed"]}
 });
 
 
@@ -37,27 +38,24 @@ MatrixActions.login.listen(function (user_id, password) {
     });
 });
 
-//import request from 'request';
-//
-//class MatrixActions {
-//
-//    static init() {
-//        var matrixClient = MatrixSDK.createClient({
-//            baseUrl: "https://m.skaverat.net:61448",
-//            accessToken: myAccessToken,
-//            userId: myUserId
-//        });
-//
-//        matrixClient.on("syncComplete", function(){
-//            var rooms = matrixClient.getRooms();
-//            AppDipatcher.dispatch({
-//                action: {
-//                    actionType: RoomConstants.ROOM_LIST,
-//                    rooms: rooms
-//                },
-//                source: 'Event'
-//            });
-//
+MatrixActions.init.listen(function(credentials) {
+    var _this = this;
+
+    let matrixClient = MatrixSDK.createClient({
+        baseUrl: credentials.base_url,
+        accessToken: credentials.access_token,
+        userId: credentials.user_id
+    });
+
+    matrixClient.on("syncComplete", function () {
+        let rooms = matrixClient.getRooms();
+        _this.success({
+            rooms: rooms
+        })
+    });
+
+    matrixClient.startClient();
+});
 //            matrixClient.on("Room.timeline", function (event, state) {
 //                AppDipatcher.dispatch({
 //                    action: {
@@ -68,11 +66,5 @@ MatrixActions.login.listen(function (user_id, password) {
 //                })
 //            });
 //
-//        });
 //
-//        matrixClient.startClient();
-//    }
-//
-//}
-
-module.exports = MatrixActions;
+export default MatrixActions;

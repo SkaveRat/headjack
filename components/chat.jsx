@@ -1,37 +1,29 @@
-import React from 'react';
-import ChatStore from '../stores/ChatStore.js';
+const React = require('react');
+const Reflux = require('reflux');
 
+const MatrixActions = require('../actions/MatrixActions');
 
-function getChatState() {
-    return {}
-}
+const CredentialsStore = require('../stores/CredentialsStore');
+const RoomStore = require('../stores/RoomStore');
 
-const Chat = React.createClass({
+const Rooms = require('./rooms.jsx');
 
-    getInitialState: function() {
-        return getChatState();
+export default React.createClass({
+
+    mixins: [
+        Reflux.connect(CredentialsStore, 'credentials'),
+        Reflux.connect(RoomStore, 'rooms')
+    ],
+
+    getInitialState: function () {
+        return this.state;
     },
 
-    componentDidMount: function() {
-        ChatStore.addChangeListener(this._onChange);
+    componentDidMount: function () {
+        MatrixActions.init(this.state.credentials);
     },
 
-    componentWillUnmount: function() {
-        RoomStore.removeChangeListener(this._onChange);
-    },
-
-    render: function() {
-
-        return <div className="col-xs-6">
-
-            <h1>Hello world!</h1>
-
-
-        </div>
-    },
-
-    _onChange: function() {
-        this.setState(getChatState());
+    render: function () {
+        return <Rooms />
     }
 });
-module.exports = Chat;
