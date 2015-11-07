@@ -1,30 +1,23 @@
 const React = require('react');
 const Reflux = require('reflux');
 const RoomStore = require('./../stores/RoomStore');
-const Room = require('./room.jsx');
+
+const Room = require('./partials/room.jsx');
 
 
 export default React.createClass({
-    mixins: [Reflux.connect(RoomStore, 'rooms')],
+    mixins: [Reflux.connect(RoomStore, 'room_store')],
 
     getInitialState: function() {
-        return this.state;
+        return {room_store:{}};
     },
 
     render: function() {
-        let roomsObject = this.state.rooms;
-        let rooms = [];
-        for (var key in roomsObject) {
-            rooms.push(roomsObject[key]);
-        }
-
-        rooms.sort((a,b) => {
-            return a.timeline[a.timeline.length-1].event.age - b.timeline[b.timeline.length-1].event.age;
-        });
+        let rooms = this.state.room_store.rooms || [];
 
         return <ul id="roomlist" className="list-group">
                 {rooms.map((room) =>
-                    <li className="list-group-item" key={room.roomId}>{room.name}</li>
+                    <Room key={room.roomId} roomName={room.name} roomId={room.roomId} />
                 )}
             </ul>
     }

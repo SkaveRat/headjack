@@ -2,7 +2,7 @@
 import React from 'react';
 
 
-const Room = React.createClass({
+export default React.createClass({
     render: function() {
         return <li className="list-group-item">
             <span className="label label-default label-pill pull-right">14</span>
@@ -10,5 +10,3 @@ const Room = React.createClass({
         </li>
     }
 });
-
-module.exports = Room;
