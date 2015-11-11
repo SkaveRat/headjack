@@ -7,7 +7,7 @@ import dns from 'dns';
 let MatrixActions = Reflux.createActions({
     "login": {children: ["success", "failed"]},
     "init": {children: ["success", "failed"]},
-    "room": {children: ["timeline", "failed"]}
+    "room": {children: ["timeline"]}
 });
 
 
@@ -57,7 +57,7 @@ MatrixActions.init.listen(function(credentials) {
 
 
     matrixClient.on("Room.timeline", function (event, room, start) {
-        MatrixActions.room.timeline(room, start)
+        MatrixActions.room.timeline(event, room, start)
     });
 
 

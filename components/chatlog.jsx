@@ -17,9 +17,9 @@ export default React.createClass({
     render: function () {
 
         return <ul>
-            {this.state.messages.room_messages.map((msg) =>
-            <li key={msg} className="list-group-item">
-                <span>{msg}</span>
+            {this.state.messages.room_messages.map((event) =>
+            <li key={event.event.event_id} className="list-group-item">
+                <span>{event.event.content.body}</span>
             </li>
                 )}
         </ul>
