@@ -1,14 +1,23 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import {EventEmitter} from 'events';
-import assign from 'object-assign';
+import Reflux from 'reflux';
 
-const CHANGE_EVENT = 'change';
+import UiActions from '../actions/UiActions';
 
+export default Reflux.createStore({
 
-export default assign({}, EventEmitter.prototype, {
-    addChangeListener: function(callback) {
-        this.on(CHANGE_EVENT, callback);
+    data: {
+        room_messages: [],
+        messages: {
+            '!GnEEPYXUhoaHbkFBNX:matrix.org': ['foo', 'bar'],
+            '!XqBunHwQIXUiqCaoxq:matrix.org': ['baz']
+        }
+    },
+
+    init: function () {
+        this.listenTo(UiActions.rooms.select, this.handleRoomsSelect);
+    },
+
+    handleRoomsSelect: function (room_id) {
+        this.data.room_messages = this.data.messages[room_id];
+        this.trigger(this.data);
     }
-
-    
 });

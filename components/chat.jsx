@@ -7,12 +7,12 @@ const CredentialsStore = require('../stores/CredentialsStore');
 const RoomStore = require('../stores/RoomStore');
 
 const Rooms = require('./rooms.jsx');
+const Chatlog = require('./chatlog.jsx');
 
 export default React.createClass({
 
     mixins: [
-        Reflux.connect(CredentialsStore, 'credentials'),
-        Reflux.connect(RoomStore, 'rooms')
+        Reflux.connect(CredentialsStore, 'credentials')
     ],
 
     getInitialState: function () {
@@ -28,7 +28,9 @@ export default React.createClass({
             <div className="col-xs-4">
                 <Rooms />
             </div>
-            <div className="col-xs-8">The Chat</div>
+            <div className="col-xs-8">
+                <Chatlog />
+            </div>
 
         </div>;
 

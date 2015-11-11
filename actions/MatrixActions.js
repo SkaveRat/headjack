@@ -6,7 +6,8 @@ import dns from 'dns';
 
 let MatrixActions = Reflux.createActions({
     "login": {children: ["success", "failed"]},
-    "init": {children: ["success", "failed"]}
+    "init": {children: ["success", "failed"]},
+    "room": {children: ["timeline", "failed"]}
 });
 
 
@@ -54,17 +55,12 @@ MatrixActions.init.listen(function(credentials) {
         })
     });
 
+
+    matrixClient.on("Room.timeline", function (event, room, start) {
+        MatrixActions.room.timeline(room, start)
+    });
+
+
     matrixClient.startClient();
 });
-//            matrixClient.on("Room.timeline", function (event, state) {
-//                AppDipatcher.dispatch({
-//                    action: {
-//                        actionType: RoomConstants.ROOM_UPDATE,
-//                        room: state
-//                    },
-//                    source: 'Event'
-//                })
-//            });
-//
-//
 export default MatrixActions;
