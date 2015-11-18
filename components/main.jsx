@@ -19,9 +19,9 @@ const Main = React.createClass({
         }
 
 
-        return <div className="container-fluid">
-                {view}
-            </div>
+        return <div id="main">
+            {view}
+        </div>
     }
 });
 module.exports = Main;

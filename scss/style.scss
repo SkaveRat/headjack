@@ -1,19 +1,44 @@
-$enable-flex: true;
-$enable-transitions: true;
-$enable-shadows: true;
-$enable-gradients: true;
-$spacer-x: 0;
-
-
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-@import "bootstrap/bootstrap";
+@import "reset";
 
 body {
   font-family: 'Open Sans', Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
 }
 
-#roomlist {
-  max-height: 22rem;
-  overflow-y: auto;
-  overflow-x: hidden;
+.container-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+#main {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+}
+
+#sidebar {
+  overflow: auto;
+  flex: 4;
+}
+
+#chatlog {
+  flex: 5;
+}
+
+#log {
+  flex: 8;
+}
+
+#input {
+  flex: 1;
 }

@@ -6,7 +6,7 @@ const MatrixActions = require('../actions/MatrixActions');
 const CredentialsStore = require('../stores/CredentialsStore');
 const RoomStore = require('../stores/RoomStore');
 
-const Rooms = require('./rooms.jsx');
+const Sidebar = require('./sidebar.jsx');
 const Chatlog = require('./chatlog.jsx');
 
 export default React.createClass({
@@ -24,15 +24,9 @@ export default React.createClass({
     },
 
     render: function () {
-        return <div className="row">
-            <div className="col-xs-4">
-                <Rooms />
-            </div>
-            <div className="col-xs-8">
-                <Chatlog />
-            </div>
-
-        </div>;
-
+        return <div className="container-horizontal">
+            <Sidebar />
+            <Chatlog />
+        </div>
     }
 });

@@ -16,12 +16,15 @@ export default React.createClass({
 
     render: function () {
 
-        return <ul>
-            {this.state.messages.room_messages.map((event) =>
-            <li key={event.event.event_id} className="list-group-item">
-                <span>{event.event.content.body}</span>
-            </li>
-                )}
-        </ul>
+        return <section id="chatlog" className="container-vertical">
+            <div id="log">
+                {this.state.messages.room_messages.map((event) =>
+                <li key={event.event.event_id} className="list-group-item">
+                    <span>{event.event.content.body}</span>
+                </li>
+                    )}
+            </div>
+            <div id="input">INPUT</div>
+        </section>
     }
 });
