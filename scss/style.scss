@@ -17,7 +17,17 @@ body {
 
 #sidebar {
   overflow: auto;
+  border-right: 1px solid #222;
 }
 #chatlog {}
 #log {}
 #input {}
+
+.roomlist {
+  list-style: none;
+
+  li>span{
+    display: block;
+    margin: 20px 5px;
+  }
+}

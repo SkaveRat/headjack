@@ -15,10 +15,10 @@ export default React.createClass({
     render: function () {
         let rooms = this.state.room_store.rooms || [];
 
-        return <aside id="sidebar" className="flex-1">
-            <ul>
+        return <aside id="sidebar" className="flex-2">
+            <ul className="roomlist">
                 {rooms.map((room) =>
-                <Room key={room.roomId} roomName={room.name} roomId={room.roomId}/>
+                <Room key={room.roomId} roomName={room.name} roomId={room.roomId} />
                     )}
             </ul>
         </aside>

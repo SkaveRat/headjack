@@ -9,7 +9,7 @@ export default React.createClass({
         let room_id = this.props.roomId;
         let room_name = this.props.roomName;
 
-        return <li onClick={this.handleRoomSelect.bind(null, room_id)} className="list-group-item">{room_name}</li>
+        return <li onClick={this.handleRoomSelect.bind(null, room_id)} className="list-group-item"><span>{room_name}</span></li>
     },
 
     handleRoomSelect: function (event) {
