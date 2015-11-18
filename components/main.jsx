@@ -19,7 +19,7 @@ const Main = React.createClass({
         }
 
 
-        return <div id="main">
+        return <div id="main" className="container-horizontal">
             {view}
         </div>
     }

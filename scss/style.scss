@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import "reset";
+@import "flex";
 
 body {
   font-family: 'Open Sans', Verdana, sans-serif;
@@ -9,36 +10,14 @@ body {
   width: 100%;
 }
 
-.container-vertical {
-  display: flex;
-  flex-direction: column;
-}
-
-.container-horizontal {
-  display: flex;
-  flex-direction: row;
-}
-
 #main {
-  display: flex;
-  flex-direction: row;
   align-items: stretch;
   height: 100vh;
 }
 
 #sidebar {
   overflow: auto;
-  flex: 4;
 }
-
-#chatlog {
-  flex: 5;
-}
-
-#log {
-  flex: 8;
-}
-
-#input {
-  flex: 1;
-}
+#chatlog {}
+#log {}
+#input {}

@@ -15,7 +15,7 @@ export default React.createClass({
     render: function () {
         let rooms = this.state.room_store.rooms || [];
 
-        return <aside id="sidebar">
+        return <aside id="sidebar" className="flex-4">
             <ul>
                 {rooms.map((room) =>
                 <Room key={room.roomId} roomName={room.name} roomId={room.roomId}/>
