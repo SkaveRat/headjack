@@ -24,7 +24,7 @@ export default React.createClass({
     },
 
     render: function () {
-        return <div className="container-horizontal">
+        return <div className="container-horizontal flex-1">
             <Sidebar />
             <Chatlog />
         </div>
