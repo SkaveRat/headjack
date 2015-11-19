@@ -6,6 +6,7 @@ import MatrixActions from '../actions/MatrixActions';
 export default Reflux.createStore({
 
     data: {
+        current_room: "",
         room_messages: [],
         messages: {}
     },
@@ -16,6 +17,7 @@ export default Reflux.createStore({
     },
 
     handleRoomsSelect: function (room_id) {
+        this.data.current_room = room_id;
         this.data.room_messages = this.data.messages[room_id];
         this.trigger(this.data);
     },

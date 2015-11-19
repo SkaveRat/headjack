@@ -7,7 +7,7 @@ import dns from 'dns';
 let MatrixActions = Reflux.createActions({
     "login": {children: ["success", "failed"]},
     "init": {children: ["success", "failed"]},
-    "room": {children: ["timeline"]}
+    "room": {children: ["timeline", "send"]}
 });
 
 
@@ -60,7 +60,16 @@ MatrixActions.init.listen(function(credentials) {
         MatrixActions.room.timeline(event, room, start)
     });
 
+    MatrixActions.room.send.listen(function (room_id, message) {
+       matrixClient.sendTextMessage(room_id, message)
+       .then(function (foo) {
+           console.log("send success: ");
+           console.log(foo);
+       });
+    });
 
     matrixClient.startClient();
 });
+
+
 export default MatrixActions;

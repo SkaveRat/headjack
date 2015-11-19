@@ -27,6 +27,16 @@ export default React.createClass({
         }
     },
 
+    handleSubmit: function (evnt) {
+        evnt.preventDefault();
+        MatrixActions.room.send(this.state.messages.current_room, this.state.inputfield);
+        this.setState({inputfield: ""});
+    },
+
+    handleTextinput: function (evnt) {
+        this.setState({inputfield: evnt.target.value});
+    },
+
     render: function () {
         return <section id="chatlog" className="container-vertical flex-5">
             <div id="log" className="flex-8" ref="log">
@@ -36,7 +46,11 @@ export default React.createClass({
                 </div>
                     )}
             </div>
-            <div id="input" className="flex-1">INPUT</div>
+            <div id="input" className="flex-1">
+                <form onSubmit={this.handleSubmit}>
+                    <input onChange={this.handleTextinput} value={this.state.inputfield} type="text"/>
+                </form>
+            </div>
         </section>
     }
 });
