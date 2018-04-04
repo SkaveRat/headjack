@@ -12,7 +12,7 @@ Very early and experimental matrix.org desktop application, using Electron
 
 ## Install dependencies
 
-`npm insall`
+`npm install`
 
 ## Run
 
